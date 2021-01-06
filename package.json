@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "koa-send": "^5.0.1",
+    "koa-static": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/koa-send": "^4.1.2",
+    "@types/koa-static": "^4.0.1"
+  }
+}

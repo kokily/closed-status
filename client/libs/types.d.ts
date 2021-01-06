@@ -11,6 +11,6 @@ export interface ClosedType {
   id: string;
   year: string;
   month: string;
-  users: UserType;
+  users: UserType[] | null;
   created_at: string;
 }
