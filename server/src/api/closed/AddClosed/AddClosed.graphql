@@ -1,0 +1,17 @@
+type AddClosedResponse {
+  ok: Boolean!
+  error: String
+}
+
+input InputUser {
+  username: String!
+  closed_date: [String]
+}
+
+type Mutation {
+  AddClosed(
+    year: String!
+    month: String!
+    users: [InputUser]!
+  ): AddClosedResponse!
+}

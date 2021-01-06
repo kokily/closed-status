@@ -1,0 +1,11 @@
+type ReadClosedResponse {
+  ok: Boolean!
+  error: String
+  closed: Closed
+}
+
+type Query {
+  ReadClosed(
+    id: ID!
+  ): ReadClosedResponse!
+}

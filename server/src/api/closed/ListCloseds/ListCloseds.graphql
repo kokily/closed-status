@@ -1,0 +1,11 @@
+type ListClosedsResponse {
+  ok: Boolean!
+  error: String
+  closeds: [Closed]
+}
+
+type Query {
+  ListCloseds(
+    cursor: ID
+  ): ListClosedsResponse!
+}

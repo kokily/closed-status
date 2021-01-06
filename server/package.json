@@ -1,0 +1,41 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "pretypes": "gql-merge --out-file ./src/schema.graphql ./src/api/**/*.graphql",
+    "types": "graphql-to-typescript ./src/schema.graphql ./src/types/graph.d.ts",
+    "predev": "yarn types",
+    "dev": "cross-env NODE_ENV=development ts-node-dev --respawn ./src/server.ts"
+  },
+  "dependencies": {
+    "@koa/cors": "^3.1.0",
+    "apollo-server-koa": "^2.19.1",
+    "aws-sdk": "^2.822.0",
+    "dotenv": "^8.2.0",
+    "gql-merge": "^0.0.6",
+    "graphql": "^15.4.0",
+    "graphql-middleware": "^6.0.0",
+    "graphql-tools": "^7.0.2",
+    "koa": "^2.13.1",
+    "koa-body": "^4.2.0",
+    "koa-router": "^10.0.0",
+    "merge-graphql-schemas": "^1.7.8",
+    "moment": "^2.29.1",
+    "pg": "^8.5.1",
+    "typeorm": "^0.2.29"
+  },
+  "devDependencies": {
+    "@types/dotenv": "^8.2.0",
+    "@types/koa": "^2.11.6",
+    "@types/koa-router": "^7.4.1",
+    "@types/moment": "^2.13.0",
+    "@types/node": "^14.14.20",
+    "babel-runtime": "^6.26.0",
+    "cross-env": "^7.0.3",
+    "graphql-to-typescript": "^0.1.2",
+    "ts-node-dev": "^1.1.1",
+    "typescript": "^4.1.3"
+  }
+}

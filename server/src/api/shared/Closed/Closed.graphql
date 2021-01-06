@@ -1,0 +1,7 @@
+type Closed {
+  id: ID!
+  year: String!
+  month: String!
+  users: [User]
+  created_at: Date!
+}

@@ -1,0 +1,8 @@
+type User {
+  id: ID!
+  username: String!
+  closed_date: [String]
+  closedId: String!
+  closed: Closed
+  created_at: Date!
+}
