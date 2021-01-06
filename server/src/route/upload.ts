@@ -27,7 +27,7 @@ upload.get('/:id', async (ctx: Context, next: Next) => {
 
   try {
     const jsonData = await csvtojson().fromFile(
-      `https://image.closed-status.shop/upload/${id}`
+      `https://file.closed-status.shop/upload/${id}`
     );
 
     ctx.body = jsonData;
