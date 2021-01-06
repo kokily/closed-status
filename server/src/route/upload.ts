@@ -24,6 +24,7 @@ upload.get('/:id', async (ctx: Context, next: Next) => {
   if ('GET' != ctx.method) return await next();
 
   const { id } = ctx.params;
+  console.log(id);
 
   try {
     const jsonData = await csvtojson().fromFile(
@@ -64,7 +65,7 @@ const uploadFile = async (file: fileType) => {
 
     s3.upload(
       {
-        Bucket: 'image.closed-status.shop',
+        Bucket: 'file.closed-status.shop',
         Body: stream,
         Key: newFilename,
         ContentType: file.type,
