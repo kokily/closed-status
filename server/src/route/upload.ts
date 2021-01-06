@@ -3,6 +3,7 @@ import Router from 'koa-router';
 import aws from 'aws-sdk';
 import fs from 'fs';
 import moment from 'moment';
+import csvtojson from 'csvtojson';
 
 const upload = new Router();
 
@@ -16,6 +17,22 @@ upload.post('/', async (ctx: Context, next: Next) => {
     ctx.body = { key, url };
   } else {
     await next();
+  }
+});
+
+upload.get('/:id', async (ctx: Context, next: Next) => {
+  if ('GET' != ctx.method) return await next();
+
+  const { id } = ctx.params;
+
+  try {
+    const jsonData = await csvtojson().fromFile(
+      `https://image.closed-status.shop/upload/${id}`
+    );
+
+    ctx.body = jsonData;
+  } catch (err) {
+    ctx.throw(500, err);
   }
 });
 

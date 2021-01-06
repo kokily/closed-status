@@ -13,6 +13,7 @@
     "@koa/cors": "^3.1.0",
     "apollo-server-koa": "^2.19.1",
     "aws-sdk": "^2.822.0",
+    "csvtojson": "^2.0.10",
     "dotenv": "^8.2.0",
     "gql-merge": "^0.0.6",
     "graphql": "^15.4.0",
@@ -27,6 +28,7 @@
     "typeorm": "^0.2.29"
   },
   "devDependencies": {
+    "@types/csvtojson": "^1.1.5",
     "@types/dotenv": "^8.2.0",
     "@types/koa": "^2.11.6",
     "@types/koa-router": "^7.4.1",
