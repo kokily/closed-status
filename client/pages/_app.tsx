@@ -4,6 +4,7 @@ import { AppProps } from 'next/app';
 import { ToastContainer } from 'react-toastify';
 import GlobalStyle from '../libs/styles';
 import withApollo from '../libs/withApollo';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface ClosedStatusProps extends AppProps {
   apolloClient: any;

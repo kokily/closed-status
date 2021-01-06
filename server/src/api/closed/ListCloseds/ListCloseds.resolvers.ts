@@ -12,8 +12,7 @@ const resolvers: Resolvers = {
         const query = await getManager()
           .createQueryBuilder(Closed, 'closed')
           .limit(15)
-          .orderBy('closed.created_at', 'DESC')
-          .addOrderBy('closed.id', 'DESC');
+          .orderBy('closed.created_at', 'DESC');
 
         if (cursor) {
           const closed = await getRepository(Closed).findOne({ id: cursor });

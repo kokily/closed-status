@@ -5,9 +5,9 @@ import createApolloClient from './apollo';
 
 let apolloClient: ApolloClient<NormalizedCacheObject> | null = null;
 
-const initApolloClient = (initialState: any) => {
+const initApolloClient = (initState: any) => {
   if (!apolloClient) {
-    apolloClient = createApolloClient(initialState);
+    apolloClient = createApolloClient(initState);
   }
 
   return apolloClient;
