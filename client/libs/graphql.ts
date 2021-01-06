@@ -48,17 +48,6 @@ export const ADD_CLOSED = gql`
     AddClosed(year: $year, month: $month, users: $users) {
       ok
       error
-      closed {
-        id
-        year
-        month
-        users {
-          id
-          username
-          closed_date
-        }
-        created_at
-      }
     }
   }
 `;

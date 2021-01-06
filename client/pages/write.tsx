@@ -56,8 +56,8 @@ const WritePage = () => {
           return axios
             .get(
               process.env.NODE_ENV === 'production'
-                ? `${prodServer}/upload/${res.data}`
-                : `${devServer}/upload/${res.data}`
+                ? `${prodServer}/upload/${res.data.key}`
+                : `${devServer}/upload/${res.data.key}`
             )
             .then((res) => {
               const data = res.data;

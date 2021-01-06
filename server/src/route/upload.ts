@@ -7,6 +7,18 @@ import csvtojson from 'csvtojson';
 
 const upload = new Router();
 
+aws.config.update({
+  region: 'ap-northeast-2',
+  accessKeyId: process.env.ACCESS_KEY_ID,
+  secretAccessKey: process.env.SECRET_ACCESS_KEY,
+});
+
+const s3 = new aws.S3({
+  apiVersion: '2006-03-01',
+});
+
+const Bucket = 'file.closed-status.shop';
+
 upload.post('/', async (ctx: Context, next: Next) => {
   if (ctx.request.files) {
     const file = ctx.request.files.file;
@@ -24,14 +36,11 @@ upload.get('/:id', async (ctx: Context, next: Next) => {
   if ('GET' != ctx.method) return await next();
 
   const { id } = ctx.params;
-  console.log(id);
 
   try {
-    const jsonData = await csvtojson().fromFile(
-      `https://file.closed-status.shop/upload/${id}`
-    );
+    const data = await getFile(id);
 
-    ctx.body = jsonData;
+    ctx.body = data;
   } catch (err) {
     ctx.throw(500, err);
   }
@@ -45,16 +54,6 @@ interface fileType {
 
 const uploadFile = async (file: fileType) => {
   return new Promise((resolve, reject) => {
-    aws.config.update({
-      region: 'ap-northeast-2',
-      accessKeyId: process.env.ACCESS_KEY_ID,
-      secretAccessKey: process.env.SECRET_ACCESS_KEY,
-    });
-
-    const s3 = new aws.S3({
-      apiVersion: '2006-03-01',
-    });
-
     const stream = fs.createReadStream(file.path);
     const saveTime = `${moment().format('YYMMDD_HHmmdd')}`;
     const newFilename = `${saveTime}_${file.name.trim()}`;
@@ -65,7 +64,7 @@ const uploadFile = async (file: fileType) => {
 
     s3.upload(
       {
-        Bucket: 'file.closed-status.shop',
+        Bucket,
         Body: stream,
         Key: newFilename,
         ContentType: file.type,
@@ -82,6 +81,19 @@ const uploadFile = async (file: fileType) => {
       }
     );
   });
+};
+
+const getFile = async (name: string) => {
+  const stream = s3
+    .getObject({
+      Bucket,
+      Key: name,
+    })
+    .createReadStream();
+
+  const data = await csvtojson().fromStream(stream);
+
+  return data;
 };
 
 export default upload;
