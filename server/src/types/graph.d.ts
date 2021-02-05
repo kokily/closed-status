@@ -1,4 +1,4 @@
-export const typeDefs = ["type AddClosedResponse {\n  ok: Boolean!\n  error: String\n}\n\ninput InputUser {\n  username: String!\n  closed_date: [String]\n}\n\ntype Mutation {\n  AddClosed(year: String!, month: String!, users: [InputUser]!): AddClosedResponse!\n}\n\ntype ListClosedsResponse {\n  ok: Boolean!\n  error: String\n  closeds: [Closed]\n}\n\ntype Query {\n  ListCloseds(cursor: ID): ListClosedsResponse!\n  ReadClosed(id: ID!): ReadClosedResponse!\n}\n\ntype ReadClosedResponse {\n  ok: Boolean!\n  error: String\n  closed: Closed\n}\n\ntype Closed {\n  id: ID!\n  year: String!\n  month: String!\n  users: [User]\n  created_at: Date!\n}\n\nscalar Date\n\ntype User {\n  id: ID!\n  username: String!\n  closed_date: [String]\n  closedId: String!\n  closed: Closed\n  created_at: Date!\n}\n"];
+export const typeDefs = ["type AddClosedResponse {\n  ok: Boolean!\n  error: String\n}\n\ninput InputUser {\n  username: String!\n  closed_date: [String]\n}\n\ntype Mutation {\n  AddClosed(year: String!, month: String!, users: [InputUser]!): AddClosedResponse!\n  RemoveClosed(id: ID!): RemoveClosedResponse!\n}\n\ntype ListClosedsResponse {\n  ok: Boolean!\n  error: String\n  closeds: [Closed]\n}\n\ntype Query {\n  ListCloseds(cursor: ID): ListClosedsResponse!\n  ReadClosed(id: ID!): ReadClosedResponse!\n}\n\ntype ReadClosedResponse {\n  ok: Boolean!\n  error: String\n  closed: Closed\n}\n\ntype RemoveClosedResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype Closed {\n  id: ID!\n  year: String!\n  month: String!\n  users: [User]\n  created_at: Date!\n}\n\nscalar Date\n\ntype User {\n  id: ID!\n  username: String!\n  closed_date: [String]\n  closedId: String!\n  closed: Closed\n  created_at: Date!\n}\n"];
 /* tslint:disable */
 
 export interface Query {
@@ -47,6 +47,7 @@ export interface ReadClosedResponse {
 
 export interface Mutation {
   AddClosed: AddClosedResponse;
+  RemoveClosed: RemoveClosedResponse;
 }
 
 export interface AddClosedMutationArgs {
@@ -55,12 +56,21 @@ export interface AddClosedMutationArgs {
   users: Array<InputUser>;
 }
 
+export interface RemoveClosedMutationArgs {
+  id: string;
+}
+
 export interface InputUser {
   username: string;
   closed_date: Array<string> | null;
 }
 
 export interface AddClosedResponse {
+  ok: boolean;
+  error: string | null;
+}
+
+export interface RemoveClosedResponse {
   ok: boolean;
   error: string | null;
 }

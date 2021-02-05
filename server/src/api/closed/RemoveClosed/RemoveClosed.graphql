@@ -1,0 +1,10 @@
+type RemoveClosedResponse {
+  ok: Boolean!
+  error: String
+}
+
+type Mutation {
+  RemoveClosed(
+    id: ID!
+  ): RemoveClosedResponse!
+}

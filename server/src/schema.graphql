@@ -10,6 +10,7 @@ input InputUser {
 
 type Mutation {
   AddClosed(year: String!, month: String!, users: [InputUser]!): AddClosedResponse!
+  RemoveClosed(id: ID!): RemoveClosedResponse!
 }
 
 type ListClosedsResponse {
@@ -27,6 +28,11 @@ type ReadClosedResponse {
   ok: Boolean!
   error: String
   closed: Closed
+}
+
+type RemoveClosedResponse {
+  ok: Boolean!
+  error: String
 }
 
 type Closed {

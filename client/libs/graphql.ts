@@ -51,3 +51,13 @@ export const ADD_CLOSED = gql`
     }
   }
 `;
+
+// Remove Closed
+export const REMOVE_CLOSED = gql`
+  mutation RemoveClosed($id: ID!) {
+    RemoveClosed(id: $id) {
+      ok
+      error
+    }
+  }
+`;
