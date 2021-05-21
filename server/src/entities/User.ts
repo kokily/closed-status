@@ -26,7 +26,9 @@ class User extends BaseEntity {
   @CreateDateColumn()
   created_at!: Date;
 
-  @ManyToOne((type) => Closed, (closed) => closed.users)
+  @ManyToOne((type) => Closed, (closed) => closed.users, {
+    onDelete: 'CASCADE',
+  })
   closed!: Closed;
 }
 
